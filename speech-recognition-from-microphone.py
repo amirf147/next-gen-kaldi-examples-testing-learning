@@ -185,12 +185,9 @@ def speech_recognition_process(args):
             while recognizer.is_ready(stream):
                 recognizer.decode_stream(stream)
             result = recognizer.get_result(stream)
-            # user_input = input()
-            # if last_result != result and user_input:
+            
             if last_result != result:
-                # kag_part = "KaldiActiveGrammar: " + user_input
-                last_result = result 
-                # print("\r{}\n{}".format(result, kag_part), end="\n"*10, flush=True)
+                last_result = result
                 print("\r{}".format(result), end="\n", flush=True)
 
 def main():
