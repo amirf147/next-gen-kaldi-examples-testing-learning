@@ -29,7 +29,6 @@ except ImportError:
     sys.exit(-1)
 
 import sherpa_onnx
-# import threading
 
 def assert_file_exists(filename: str):
     assert Path(filename).is_file(), (
@@ -157,18 +156,7 @@ def create_recognizer(args):
     )
     return recognizer
 
-# not working just did some quick initial experimentation which failed
-# def capture_user_input():
-#     user_input = input()
-#     print(user_input)
-#     # Do something with the user input (e.g., store or process)
-
-# user_input_thread = threading.Thread(target=capture_user_input)
-# user_input_thread.start()
-
-def main():
-    args = get_args()
-
+def check_input_device():
     devices = sd.query_devices()
     if len(devices) == 0:
         print("No microphone devices found")
@@ -177,6 +165,8 @@ def main():
     print(devices)
     default_input_device_idx = sd.default.device[0]
     print(f'Use default device: {devices[default_input_device_idx]["name"]}')
+
+def speech_recognition_process(args):
 
     recognizer = create_recognizer(args)
     print("Started! Please speak")
@@ -202,6 +192,11 @@ def main():
                 last_result = result 
                 # print("\r{}\n{}".format(result, kag_part), end="\n"*10, flush=True)
                 print("\r{}".format(result), end="\n", flush=True)
+
+def main():
+    args = get_args()
+    check_input_device()
+    speech_recognition_process(args)
 
 if __name__ == "__main__":
     try:
