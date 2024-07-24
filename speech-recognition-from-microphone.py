@@ -166,10 +166,7 @@ def check_input_device():
     default_input_device_idx = sd.default.device[0]
     print(f'Use default device: {devices[default_input_device_idx]["name"]}')
 
-def speech_recognition_process(args):
-
-    recognizer = create_recognizer(args)
-    print("Started! Please speak")
+def speech_recognition_process(recognizer):
 
     # The model is using 16 kHz, we use 48 kHz here to demonstrate that
     # sherpa-onnx will do resampling inside.
@@ -177,6 +174,7 @@ def speech_recognition_process(args):
     samples_per_read = int(0.1 * sample_rate)  # 0.1 second = 100 ms
     last_result = ""
     stream = recognizer.create_stream()
+    
     with sd.InputStream(channels=1, dtype="float32", samplerate=sample_rate) as s:
         while True:
             samples, _ = s.read(samples_per_read)  # a blocking read
@@ -191,9 +189,14 @@ def speech_recognition_process(args):
                 print("\r{}".format(result), end="\n", flush=True)
 
 def main():
+
     args = get_args()
     check_input_device()
-    speech_recognition_process(args)
+
+    recognizer = create_recognizer(args)
+    print("Started! Please speak")
+    speech_recognition_process(recognizer)
+
 
 if __name__ == "__main__":
     try:
