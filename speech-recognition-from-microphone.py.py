@@ -130,7 +130,6 @@ def get_args():
 
     return parser.parse_args()
 
-
 def create_recognizer(args):
     assert_file_exists(args.encoder)
     assert_file_exists(args.decoder)

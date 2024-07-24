@@ -1,1 +1,5 @@
+# Ignore Python compiled bytecode files
+*.pyc
+
+# Ignore this directory
 models/

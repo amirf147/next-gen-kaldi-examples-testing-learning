@@ -8,5 +8,5 @@ class RecognitionViewer(tk.Tk):
         self._text = ScrolledText(self, wrap="word")
         self._text.pack(side="top", fill="both", expand=True)
 
-# viewer = RecognitionViewer()
-# viewer.mainloop()
+viewer = RecognitionViewer()
+viewer.mainloop()
