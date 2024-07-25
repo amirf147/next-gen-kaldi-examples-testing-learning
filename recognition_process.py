@@ -1,7 +1,8 @@
 from recognizer import recognizer
 from audio_input import sd 
 
-def speech_recognition_process(recognizer):
+
+def speech_recognition_process(recognizer, queue):
 
     # The model is using 16 kHz, we use 48 kHz here to demonstrate that
     # sherpa-onnx will do resampling inside.
@@ -21,4 +22,5 @@ def speech_recognition_process(recognizer):
             
             if last_result != result:
                 last_result = result
-                print("\r{}".format(result), end="\n", flush=True)
+                # print("\r{}".format(result), end="\n", flush=True)
+                queue.put(result, block=False)
