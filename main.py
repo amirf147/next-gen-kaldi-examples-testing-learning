@@ -1,12 +1,27 @@
 import recognition_process as rp
 from multiprocessing import Process, Queue
-
+from queue import Empty
 recognition_results_queue = Queue()
 
 def main():
 
     rp.speech_recognition_process(rp.recognizer, recognition_results_queue)
     
+    ########not working
+    while True:
+        # Check if q has elements
+        if not recognition_results_queue.empty():
+            print("Queue is not empty! Something is in it.")
+
+        try:
+            latest_item = recognition_results_queue.get(block=False) 
+            print("Latest item in queue:", latest_item)
+        except Empty:
+            pass # Ignore if queue is empty
+
+        print("Queue size:", recognition_results_queue.qsize())
+
+
     # need to familiarize myself with queue so doing it in the recognition_process.py file
     # and i got something working. i mean i got it into a queue and i can print it from there
     # in that file, that's enough for now, will experiment with bringing here later

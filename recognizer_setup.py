@@ -23,13 +23,3 @@ assert_file_exists(ENCODER)
 assert_file_exists(DECODER)
 assert_file_exists(JOINER)
 assert_file_exists(TOKENS)
-
-recognizer = sherpa_onnx.OnlineRecognizer.from_transducer(
-    tokens=TOKENS,
-    encoder=ENCODER,
-    decoder=DECODER,
-    joiner=JOINER,
-    num_threads=1,
-    sample_rate=16000,
-    feature_dim=80,
-)

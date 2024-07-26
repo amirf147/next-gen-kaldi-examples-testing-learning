@@ -1,6 +1,17 @@
-from recognizer import recognizer
+import sherpa_onnx
+import recognizer_setup
 from audio_input import sd 
 import queue as queue_module
+
+recognizer = sherpa_onnx.OnlineRecognizer.from_transducer(
+    tokens=recognizer_setup.TOKENS,
+    encoder=recognizer_setup.ENCODER,
+    decoder=recognizer_setup.DECODER,
+    joiner=recognizer_setup.JOINER,
+    num_threads=1,
+    sample_rate=16000,
+    feature_dim=80,
+)
 
 def speech_recognition_process(recognizer, queue):
 
@@ -23,16 +34,4 @@ def speech_recognition_process(recognizer, queue):
             if last_result != result:
                 last_result = result
                 # print("\r{}".format(result), end="\n", flush=True)
-                
-                # Check if q has elements
-                if not queue.empty():
-                    print("Queue is not empty! Something is in it.")
-                
-                try:
-                    latest_item = queue.get(block=False) 
-                    print("Latest item in queue:", latest_item)
-                except queue_module.Empty:
-                    pass # Ignore if queue is empty
-
-                print("Queue size:", queue.qsize())
                 queue.put(result, block=False)
