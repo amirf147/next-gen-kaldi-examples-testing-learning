@@ -1,1 +1,5 @@
+Status update (29 July 2024):
+Due to my inexperience with doing multi processing, queues, threads, etc. and in the interest of getting something done, I plan to look more closely at https://github.com/daanzu/kaldi-active-grammar/blob/master/examples/plain_dictation.py and the other examples in that directory and maybe starting with a side by side comparison with a pre recorded audio file. Also it might make more sense to learn and use the code that David Zurow wrote that handles audio input for anything more complicated. I guess Z'm just taking the approach of doing the simplest thing first and then building from there.
+
+Previous (first one for this repo) status:
 I think it would be a good learning experience for me if i could somehow manage to do a side by side comparison with the recognition output of this script on one line and then the line below would show the the recognition output when i'm using dictation mode with dragonfly and kaldi active grammar. something along the lines of that anyway, and if not initially succeeding with that then just maybe exploring and learning how it works in the meantime
