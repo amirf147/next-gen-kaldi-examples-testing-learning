@@ -1,3 +1,5 @@
+# This script is based on the example file copied from https://github.com/k2-fsa/sherpa-onnx/blob/master/python-api-examples/speech-recognition-from-microphone.py
+
 import sherpa_onnx
 import recognizer_setup
 from audio_input import sd 
